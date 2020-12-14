@@ -37,7 +37,7 @@ server.use('/api/', (req, res) => {
 })
 
 server.get('/*', (req, res) => {
-  res.send(req.url)
+  res.send(req.url.slice(1))
 })
 
 server.get('*', (req, res, next) => {

@@ -1,8 +1,3 @@
-// import logMessage from "./js/logger";
-// import "./css/style.css";
-// // Log message to console
-// logMessage("Warm welcome to Express!");
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Root from './root'
@@ -10,7 +5,7 @@ import './css/style.css'
 
 ReactDOM.render(
   <Root />,
-  document.getElementById('react-container') // eslint-disable-line no-undef
+  document.getElementById('root') // eslint-disable-line no-undef
 )
 
 // Needed for Hot Module Replacement

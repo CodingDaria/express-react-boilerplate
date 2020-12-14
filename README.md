@@ -21,10 +21,9 @@
 3. Run project in Dev mode
 
   ```shell
-  $ yarn run buildDev
-  $ yarn run start
+  $ yarn run dev
   ```
-  Starts the development server running on `http://localhost:8080` using the webpack.dev.config.js with Hot Module Replacement (HMR) (Changes in the application code will be hot-reloaded)
+  Creates the development build and starts the development server running on `http://localhost:8080` using the webpack.dev.config.js with Hot Module Replacement (HMR) (Changes in the application code will be hot-reloaded)
 
 ## Project Structure
 
@@ -38,7 +37,22 @@ By default `webpack.dev.config.js` is used.
 
 ## Command Line Commands
 
+#### Developing
+
+```Shell
+yarn run start
+```
+Starts the development server running on `http://localhost:8080`.
+
+
 #### Building
+
+```Shell
+yarn buildDev
+```
+
+Creates the development build, piping files to the `dist` folder.
+
 
 ```Shell
 yarn buildProd
