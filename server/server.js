@@ -1,6 +1,8 @@
 import path from 'path'
 import express from 'express'
+import cors from 'cors'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -11,20 +13,32 @@ const PORT = process.env.PORT || 8080
 const server = express()
 
 const compiler = webpack(config)
-server.use(
+
+const middleware = [
+  cors(),
   webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath
-  })
-)
-server.use(webpackHotMiddleware(compiler))
+  }),
+  webpackHotMiddleware(compiler),
+  express.static(path.resolve(__dirname, '../dist/')),
+  bodyParser.json({ limit: '5mb' }),
+  cookieParser()
+]
+middleware.forEach((it) => server.use(it))
 
-server.use(express.static(__dirname))
-server.use(bodyParser.json({ limit: '5mb' }))
+server.get('/api/v1/test', (req, res) => {
+  console.log('success')
+  res.send('Hello World!')
+})
 
-// server.get("/api/v1/test", (req, res) => {
-//   console.log("success");
-//   res.json({ message: "success" });
-// });
+server.use('/api/', (req, res) => {
+  res.status(404)
+  res.end()
+})
+
+server.get('/*', (req, res) => {
+  res.send(req.url)
+})
 
 server.get('*', (req, res, next) => {
   compiler.outputFileSystem.readFile(path.join(__dirname, '..', 'index.html'), (err, result) => {
