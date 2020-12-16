@@ -3,6 +3,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // uglifyjs-webpack-plugin@1.3.0
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
 module.exports = {
   entry: {
     main: './src/index.js'
@@ -12,6 +13,7 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js'
   },
+  mode: 'production',
   target: 'web',
   devtool: 'source-map',
   // Webpack 4 does not have a CSS minifier, although
@@ -65,7 +67,14 @@ module.exports = {
         // Loads CSS into a file when you import it via Javascript
         // Rules are set in MiniCssExtractPlugin
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        sideEffects: true
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+        sideEffects: true
       }
     ]
   },

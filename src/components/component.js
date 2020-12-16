@@ -19,7 +19,7 @@ const Component = () => {
       <button
         className="border border-blue-600 bg-blue-400 hover:bg-blue-600 p-2 m-2"
         onClick={() => {
-          axios('http://localhost:8080/api/v1/test').then(({ data }) => setResponce(data))
+          axios('/api/v1/test').then(({ data }) => setResponce(data))
         }}
       >
         Try axios request
