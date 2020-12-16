@@ -23,9 +23,25 @@
   ```shell
   $ yarn run dev
   ```
-  Creates the development build and starts the development server running on `http://localhost:8080` using the webpack.dev.config.js with Hot Module Replacement (HMR) (Changes in the application code will be hot-reloaded)
+  Creates the development build and starts the development server running on `http://localhost:8087` using the webpack.dev.config.js with Hot Module Replacement (HMR) (Changes in the application code will be hot-reloaded)
+
+  ## Features
+
+* Modern ES6
+* SASS/SCSS
+* TailwindCSS
+* Redux
+* React Router
 
 ## Project Structure
+
+#### `src/`
+
+You will write your React app in this folder.
+
+#### `src/components`
+
+This folder contains all your React components.
 
 #### `dist`
 This directory contains compiled project files
@@ -40,9 +56,14 @@ By default `webpack.dev.config.js` is used.
 #### Developing
 
 ```Shell
-yarn run start
+yarn run watch:server
 ```
 Starts the development server running on `http://localhost:8080`.
+
+```Shell
+yarn run watch:client
+```
+Runs the client side of the application on `http://localhost:8087`.
 
 
 #### Building
