@@ -1,7 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+require('dotenv').config()
+
 module.exports = {
   entry: {
     main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/index.js']
@@ -15,27 +17,26 @@ module.exports = {
   target: 'web',
   devtool: 'source-map',
   devServer: {
-    // hot: false,
+    hot: false,
     contentBase: path.join(__dirname, 'dist'),
-    // watchContentBase: true,
-    // host: 'localhost',
-    port: 8087
-    // disableHostCheck: true,
-    // open: true,
-    // historyApiFallback: true,
+    watchContentBase: true,
+    host: 'localhost',
+    port: 8087,
+    disableHostCheck: true,
+    historyApiFallback: true,
     // overlay: {
     //   warnings: false,
     //   errors: true
     // },
-    // proxy: [
-    //   {
-    //     context: ['/api', '/auth', '/ws'],
-    //     target: `http://localhost:${process.env.PORT || 8090}`,
-    //     secure: false,
-    //     changeOrigin: true,
-    //     ws: process.env.ENABLE_SOCKETS || false
-    //   }
-    // ]
+    proxy: [
+      {
+        context: ['/api', '/auth', '/ws'],
+        target: `http://localhost:${process.env.PORT || 8080}`,
+        secure: false,
+        changeOrigin: true,
+        ws: process.env.ENABLE_SOCKETS || false
+      }
+    ]
   },
   module: {
     rules: [
