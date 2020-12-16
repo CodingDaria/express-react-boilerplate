@@ -14,6 +14,29 @@ module.exports = {
   mode: 'development',
   target: 'web',
   devtool: 'source-map',
+  devServer: {
+    // hot: false,
+    contentBase: path.join(__dirname, 'dist'),
+    // watchContentBase: true,
+    // host: 'localhost',
+    port: 8087
+    // disableHostCheck: true,
+    // open: true,
+    // historyApiFallback: true,
+    // overlay: {
+    //   warnings: false,
+    //   errors: true
+    // },
+    // proxy: [
+    //   {
+    //     context: ['/api', '/auth', '/ws'],
+    //     target: `http://localhost:${process.env.PORT || 8090}`,
+    //     secure: false,
+    //     changeOrigin: true,
+    //     ws: process.env.ENABLE_SOCKETS || false
+    //   }
+    // ]
+  },
   module: {
     rules: [
       {
@@ -45,11 +68,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader'
-        ]
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.scss$/,
