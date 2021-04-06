@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+const Html = ({ body }) => {
+  return `
+  <!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" http-equiv="Content-Security-Policy" content="img-src 'self' data:">
@@ -8,7 +10,11 @@
       <title>Boilerplate</title>
     </head>
     <body>
-      <div id="root"></div>
+      <div id="root">${body}</div>
       <script type="text/javascript" src="/js/main.bundle.js"></script>
     </body>
   </html>
+`
+}
+
+export default Html

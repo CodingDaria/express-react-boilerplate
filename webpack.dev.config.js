@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
-    filename: '[name].js'
+    filename: 'js/[name].bundle.js'
   },
   mode: 'development',
   target: 'web',
@@ -42,7 +42,7 @@ module.exports = {
     rules: [
       {
         enforce: 'pre',
-        test: /\.js$/,
+        test: /\.(js|jsx)$/i,
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
@@ -52,7 +52,7 @@ module.exports = {
         }
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/i,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
@@ -68,15 +68,18 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
-      },
-      {
-        test: /\.scss$/,
+        test: /\.(css|scss)$/i,
         exclude: /node_modules/,
         use: [
           'style-loader',
           'css-loader',
+          // {
+          //   loader: 'css-loader',
+          //   options: {
+          //     importLoaders: 1,
+          //     sourceMap: true
+          //   }
+          // },
           'postcss-loader',
           {
             loader: 'sass-loader',
