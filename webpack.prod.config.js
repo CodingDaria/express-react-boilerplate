@@ -67,7 +67,16 @@ module.exports = {
         // Loads CSS into a file when you import it via Javascript
         // Rules are set in MiniCssExtractPlugin
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
+          'css-loader',
+          'postcss-loader'
+        ],
         sideEffects: true
       },
       {
@@ -84,8 +93,8 @@ module.exports = {
       filename: './index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css'
     })
   ]
 }

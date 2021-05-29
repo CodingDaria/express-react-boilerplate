@@ -1,8 +1,8 @@
 {
   "printWidth": 100,
-  "trailingComma": "none",
+  "trailingComma": "all",
   "tabWidth": 2,
-  "semi": false,
+  "semi": true,
   "singleQuote": true,
   "parser": "babel",
   "arrowParens": "always"
