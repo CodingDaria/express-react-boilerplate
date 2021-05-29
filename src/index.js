@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import './css/style.css'
-import 'tailwindcss/tailwind.css'
+
 import Root from './root'
-import './css/test.scss'
+import './css/style.scss'
 
 ReactDOM.render(
   <Root />,

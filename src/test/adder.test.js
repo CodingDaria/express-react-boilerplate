@@ -1,6 +1,6 @@
-import adder from '../js/adder'
+import adder from '../js/adder';
 describe('Adder', () => {
   test('adds two numbers', () => {
-    expect(adder(5, 3)).toEqual(8)
-  })
-})
+    expect(adder(5, 3)).toEqual(8);
+  });
+});
