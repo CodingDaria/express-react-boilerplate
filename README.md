@@ -43,10 +43,7 @@ You will write your React app in this folder.
 
 This folder contains all your React components.
 
-#### `dist`
-This directory contains compiled project files
-
-#### `webpack.dev.config.js` `and webpack.prod.config.js`
+#### `webpack.dev.config.js` and `webpack.prod.config.js`
 Project environment configs. Webpack uses proper config depending on defined application environment.
 By default `webpack.dev.config.js` is used.
 
@@ -56,14 +53,23 @@ By default `webpack.dev.config.js` is used.
 #### Developing
 
 ```Shell
-yarn run watch:server
+yarn run server
 ```
 Starts the development server running on `http://localhost:8080`.
 
 ```Shell
-yarn run watch:client
+yarn run client
 ```
-Runs the client side of the application on `http://localhost:8087`.
+Runs the client side of the application on `http://localhost:8000`.
+
+```Shell
+yarn run lint
+```
+```Shell
+yarn run prettier
+```
+
+Runs respectively ESLint and Prettier on project directories.
 
 
 #### Building

@@ -7,7 +7,7 @@ const Html = ({ body }) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
       <link rel="stylesheet" href="/css/style.css" type="text/css">
-      <title>Boilerplate</title>
+      <title>Express and Webpack App</title>
     </head>
     <body>
       <div id="root">${body}</div>
