@@ -1,5 +1,12 @@
 {
-  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "parser": "@babel/eslint-parser",
   "plugins": ["react", "react-hooks", "prettier"],
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
