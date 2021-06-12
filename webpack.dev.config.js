@@ -55,7 +55,12 @@ module.exports = {
         test: /\.(css|scss)$/i,
         exclude: /node_modules/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
           {
             loader: 'css-loader',
             options: {
@@ -86,12 +91,12 @@ module.exports = {
       failOnWarning: false,
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
+      filename: 'css/style.css',
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: './src/html/index.html',
+          from: './src/assets/html/index.html',
           to: '[name][ext]',
         },
         {
@@ -99,7 +104,7 @@ module.exports = {
           to: '[name][ext]',
         },
         {
-          from: './src/img',
+          from: './src/assets/img',
           to: 'images',
         },
         {
