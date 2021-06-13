@@ -5,8 +5,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { ConnectedRouter } from 'connected-react-router';
 import { history, getStore } from './redux';
 
-import Root from './root'
-import './assets/css/style.scss'
+import Root from './root';
+import './assets/css/style.scss';
 
 const { store, persistor } = getStore();
 
