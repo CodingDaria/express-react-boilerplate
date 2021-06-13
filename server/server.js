@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import favicon from 'serve-favicon';
+import { Server } from 'socket.io';
 
 import Html from '../src/html';
 
@@ -44,6 +45,28 @@ server.get('/*', (req, res) => {
   );
 });
 
-server.listen(PORT, () => {
+const app = server.listen(PORT, () => {
   console.log(`Serving at http://localhost:${PORT}`);
 });
+
+let connections = [];
+if (process.env.ENABLE_SOCKETS === 'true') {
+  const io = new Server(app, { path: '/ws' });
+
+  io.on('connection', (socket) => {
+    console.log(`user connected ${socket.id}`);
+    connections.push(socket);
+
+    socket.on('action', (action) => {
+      switch (action.type) {
+        default: {
+          console.log(action.type);
+        }
+      }
+    });
+    socket.on('disconnect', () => {
+      connections = connections.filter((connection) => connection.id !== socket.id);
+      console.log(`user disconnected ${socket.id}`);
+    });
+  });
+}
