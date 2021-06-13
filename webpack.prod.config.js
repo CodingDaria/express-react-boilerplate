@@ -1,100 +1,125 @@
-const path = require('path')
-const HtmlWebPackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // uglifyjs-webpack-plugin@1.3.0
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin') // 5.0.4
+const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // uglifyjs-webpack-plugin@1.3.0
 
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: './src/index.js',
   },
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
-    filename: '[name].js'
+    filename: 'js/[name].bundle.js',
   },
   mode: 'production',
   target: 'web',
   devtool: 'source-map',
-  // Webpack 4 does not have a CSS minifier, although
-  // Webpack 5 will likely come with one
   optimization: {
+    minimize: true,
     minimizer: [
+      () => ({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
       new UglifyJsPlugin({
-        // uglifyOptions: {
-        //   compress: {
-        //     warnings: false,
-        //   },
-        //   sourceMap: true,
-        // },
+        exclude: /node_modules/,
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+          },
+          sourceMap: true,
+        },
         cache: true,
         parallel: true,
-        sourceMap: true // set to true if you want JS source maps
+        sourceMap: true, // set to true if you want JS source maps
       }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
+    ],
   },
   module: {
     rules: [
       {
         // Transpiles ES6-8 into ES5
-        test: /\.js$/,
+        test: /\.(js|jsx)$/i,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-          // options: {
-          //   presets: ["@babel/preset-env"],
-          // },
-        }
-      },
-      {
-        // Loads the javacript into html template provided.
-        // Entry point is set below in HtmlWebPackPlugin in Plugins
-        test: /\.html$/,
         use: [
           {
-            loader: 'html-loader',
-            options: { minimize: true }
-          }
-        ]
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          },
+        ],
       },
       {
-        // Loads images into CSS and Javascript files
-        test: /\.jpg$/,
-        use: [{ loader: 'url-loader' }]
-      },
-      {
-        // Loads CSS into a file when you import it via Javascript
-        // Rules are set in MiniCssExtractPlugin
-        test: /\.css$/,
+        // Loads CSS into a file when you import it via Javascript. Rules are set in MiniCssExtractPlugin
+        test: /\.(css|scss)$/i,
+        exclude: /node_modules/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '../'
-            }
+              publicPath: '../',
+            },
           },
-          'css-loader',
-          'postcss-loader'
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              sourceMap: true,
+            },
+          },
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
         ],
-        sideEffects: true
+        sideEffects: true,
       },
       {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
-        sideEffects: true
-      }
-    ]
+        // Loads images into CSS and Javascript files
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['url-loader', 'file-loader'],
+      },
+    ],
   },
   plugins: [
-    new HtmlWebPackPlugin({
-      template: './src/assets/html/index.html',
-      filename: './index.html'
+    new ESLintPlugin({
+      extensions: ['js', 'jsx'],
+      emitWarning: true,
+      failOnError: true,
+      failOnWarning: false,
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css'
-    })
-  ]
-}
+      filename: 'css/style.css',
+      chunkFilename: 'css/[id].css',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './src/assets/html/index.html',
+          to: '[name][ext]',
+        },
+        {
+          from: './src/html.js',
+          to: '[name][ext]',
+        },
+        {
+          from: './src/assets/img',
+          to: 'images',
+        },
+        {
+          from: './server/public/favicon.ico',
+          to: '[name][ext]',
+        },
+      ],
+    }),
+  ],
+};
