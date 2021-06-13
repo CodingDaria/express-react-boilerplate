@@ -23,7 +23,7 @@
   ```shell
   $ yarn run dev
   ```
-  Creates the development build and starts the development server running on `http://localhost:8087` using the webpack.dev.config.js with Hot Module Replacement (HMR) (Changes in the application code will be hot-reloaded)
+  Creates the development build and starts the development server running on `http://localhost:8000` using the webpack.dev.config.js with Hot Module Replacement (HMR) (Changes in the application code will be hot-reloaded)
 
   ## Features
 
@@ -32,6 +32,10 @@
 * TailwindCSS
 * Redux
 * React Router
+* Socket.io
+* MongoDB
+
+Switch to branch **light** to develop without Socket.io and MongoDB.
 
 ## Project Structure
 
