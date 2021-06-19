@@ -14,14 +14,12 @@ export const history = createBrowserHistory();
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['router'],
 };
 
 const initialState = {};
 const enhancers = [];
-const middleware = [thunk, routerMiddleware(history)];
-if (process && process.env.ENABLE_SOCKETS === 'true') {
-  middleware.push(socketMiddleware);
-}
+const middleware = [thunk, routerMiddleware(history), socketMiddleware];
 
 const composeFunc = process.env.NODE_ENV === 'development' ? composeWithDevTools : compose;
 const composedEnhancers = composeFunc(applyMiddleware(...middleware), ...enhancers);
