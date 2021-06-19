@@ -39,6 +39,10 @@ Switch to branch **light** to develop without Socket.io and MongoDB.
 
 ## Project Structure
 
+#### `server`
+
+Back-end folder. Add your server features here.
+
 #### `src/`
 
 You will write your React app in this folder.
