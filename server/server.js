@@ -5,11 +5,15 @@ import cookieParser from 'cookie-parser';
 import favicon from 'serve-favicon';
 import { Server } from 'socket.io';
 
+import mongooseService from './services/mongoose';
+
 import Html from '../src/html';
 
 require('dotenv').config();
 
 const PORT = process.env.PORT || 8080;
+
+mongooseService.connect();
 
 const server = express();
 
