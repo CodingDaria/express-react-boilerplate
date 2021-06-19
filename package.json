@@ -16,7 +16,8 @@
     "dev": "yarn run server & yarn run client",
     "prettier": "prettier ./src/**/**.js ./server/**/**.js --write",
     "lint": "eslint --ext .js src server",
-    "heroku-postbuild": "yarn run buildProd"
+    "heroku-postbuild": "yarn run buildProd",
+    "prepare": "husky install"
   },
   "jest": {
     "moduleNameMapper": {
@@ -39,7 +40,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "history": "^5.0.0",
+    "history": "4.10.1",
     "mongoose": "^5.12.14",
     "node-sass": "^6.0.0",
     "nodemon": "^2.0.6",
