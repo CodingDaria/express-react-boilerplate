@@ -7,13 +7,17 @@
     "jest": true
   },
   "parser": "@babel/eslint-parser",
-  "plugins": ["react", "react-hooks", "prettier"],
+  "plugins": ["react", "react-hooks", "prettier", "jsx-a11y"],
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-key": "warn",
+    "react/button-has-type": "warn",
+    "jsx-a11y/alt-text": "warn",
+    "jsx-a11y/no-noninteractive-element-interactions": "warn",
+    "jsx-a11y/aria-props": "warn",
     "no-console": "off",
     "no-unused-vars": "warn",
   }
